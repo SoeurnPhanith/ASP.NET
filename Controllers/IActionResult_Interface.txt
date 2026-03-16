@@ -1,0 +1,36 @@
+*What is IActionResult? 
+=>IActionResult is an interface that represents the result of an action method in a controller.
+Basically, it tells ASP.NET Core what to send back to the client:
+    1.JSON data
+    2.HTML page
+    3.Redirect
+    4.Status code (e.g., 200, 404, 500)
+    
+
+*IActionResult response status code : 
+    1.Success Responses
+        +Method                         +Status_Code             +Description
+        -Ok()                           -200 OK                  -Return success without data
+        -Ok(object value)               -200 OK                  -Return success with data (JSON, object, array, etc.)
+        -Created(                       -201 Created             -Return a resource created at a URI
+            string uri,
+            object value
+        )
+        -CreatedAtAction(               -201 Created             -Return created resource and automatically generate the URL using a controller action
+            string actionName,
+            object routeValues,
+            object value
+        )
+        -Accepted()                     -202 Accepted            -Request accepted for processing but not completed yet
+        -Accepted()                     -202 Accepted            -Return accepted with optional data         
+        
+    
+    2.Client Error Response
+        +Method                         +Status_Code             +Description
+        -BadRequest()                   -400 BadRequest          -Generic bad request
+        -BadRequest(object error)       -400 BadRequest          -Return an error message or object in response body
+        -Unauthorized()                 -401 Unauthorized        -user is not authenticated
+        -Forbid()                       -403 Forbidden           -User is authenticated but does not have permission
+        -NotFound()                     -404 Not Found           -Resource not found
+        -Conflict()                     -409 Conflict            -resource conflict, e.g., duplicate record
+        -Problem()                      -500        
