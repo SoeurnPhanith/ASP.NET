@@ -16,4 +16,7 @@ public class Student
         this.Email = email;
         this.DateOfBirth = dob;
     }
+    public Student()
+    {
+    }
 }   

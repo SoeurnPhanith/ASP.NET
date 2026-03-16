@@ -35,11 +35,83 @@ public class StudentController : ControllerBase
             return NotFound("No student found.");
         }
         
-        Student student = allStudent.FirstOrDefault(s => s.StudentId.Equals(id));
-        if (student.Equals(null))
+        Student existingStudent = findStudentById(id);
+        if (existingStudent.Equals(null))
         {
-            return NotFound("student not found.");
+            return NotFound("No student found.");
         }
-        return Ok(student); 
+        return Ok(existingStudent); 
     }
+
+    [HttpPost]
+    public IActionResult CreateStudent([FromBody] Student student)
+    {
+        if (existsByEmail(student.Email))
+        {
+            return NotFound("Email already exists. Try again later.");
+        }
+        
+        //method Max is use for find max value id in all collection
+        int newId = allStudent.Count > 0 ? allStudent.Max(s => s.StudentId) + 1 : 1;
+        
+        Student newStudent = new Student(
+            newId,  
+            student.FirstName,
+            student.LastName,
+            student.Email,
+            student.DateOfBirth
+        );
+        allStudent.Add(newStudent);
+        return Created("New Student created",newStudent);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateStudent(int id, [FromBody] Student student)
+    {
+        Student existingStudent = findStudentById(id);
+        if (existingStudent.Equals(null))
+        {
+            return NotFound("No student found.");
+        }
+
+        existingStudent.FirstName = student.FirstName;
+        existingStudent.LastName = student.LastName;
+        existingStudent.Email = student.Email;
+        existingStudent.DateOfBirth = student.DateOfBirth;
+
+        return Ok(existingStudent);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteStudent(int id)
+    {
+        Student remove = findStudentById(id);
+        if (remove.Equals(null))
+        {
+            return NotFound("No student found.");
+        }
+        
+        //remove from list
+        allStudent.Remove(remove);
+        return Ok("Removed student successfully");
+    }
+
+    
+    ///This metho is use for find student by id
+    /// if it exists it will return @data , otherwise return @null
+    Student findStudentById(int id)
+    {
+        Student existingStudent = allStudent.FirstOrDefault(s => s.StudentId == id);
+        return existingStudent;
+    }
+
+    ///This method is use for check exists student in collection or not
+    /// if it exists return @true and if not return @false
+    bool existsByEmail(string email)
+    {
+        return allStudent.Any(exists => exists.Email == email);
+    }
+    
+    
+    
 }

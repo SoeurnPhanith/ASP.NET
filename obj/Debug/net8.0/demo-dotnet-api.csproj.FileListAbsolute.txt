@@ -31,3 +31,4 @@
 /home/yutaaaa/Documents/ASP.NET/demo-dotnet-api/obj/Debug/net8.0/demo-dotnet-api.pdb
 /home/yutaaaa/Documents/ASP.NET/demo-dotnet-api/obj/Debug/net8.0/demo-dotnet-api.genruntimeconfig.cache
 /home/yutaaaa/Documents/ASP.NET/demo-dotnet-api/obj/Debug/net8.0/ref/demo-dotnet-api.dll
+/home/yutaaaa/Documents/ASP.NET/demo-dotnet-api/obj/Debug/net8.0/demo-dotnet-api.sourcelink.json
