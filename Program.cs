@@ -1,7 +1,13 @@
+using demo_dotnet_api.service;
+using demo_dotnet_api.service.impl;
+
 var builder = WebApplication.CreateBuilder(args);
 
-//add class All Controller to Main
+//add or register class All Controller to Main
 builder.Services.AddControllers();
+//add or register all service class to Main if use this if i have more service need to add again 
+builder.Services.AddSingleton<IStudentServices, StudentServiceImpl>();
+
 
 
 // Add services to the container.
