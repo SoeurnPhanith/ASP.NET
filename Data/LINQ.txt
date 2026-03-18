@@ -1,0 +1,22 @@
+*What is LINQ? 
+=> LINQ(Language Integrated Query)គឺជាការសសរសេរ Query data ដោយប្រើ 
+C# syntax ដោយមិនចាំបាច់សរសេរ SQL ដោយផ្ទាល់។
+
+
+*Useful LINQ method for write query builder in ASP.NET : 
+    1.  Where()      → Filter/Condition
+    2.  Select()     → Choose columns follow what you want 
+    3.  OrderBy() / OrderByDescending()   -> Sort Data
+    4.  Skip() / Take()      → Pagination 
+    5.  FirstOrDefault()     -> get one record or null data
+    6.  SingleOrDefault()    -> must be one record
+    7.  Any()                -> check exists data
+    8.  Count()              -> count row or record
+    9.  Count()              -> group
+    10. Join()
+    11. ToList()             → Execute every query
+    
+    
+*Flow LINQ work 
+
+C# Code  → LINQ → EF Core → SQL → Database
