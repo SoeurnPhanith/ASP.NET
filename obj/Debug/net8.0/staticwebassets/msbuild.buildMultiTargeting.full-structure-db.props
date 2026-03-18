@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/full-structure-db.props" />
+</Project>

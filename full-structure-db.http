@@ -1,0 +1,6 @@
+@full_structure_db_HostAddress = http://localhost:5173
+
+GET {{full_structure_db_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
