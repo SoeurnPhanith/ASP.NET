@@ -1,4 +1,5 @@
 using full_structure_db.Common;
+using full_structure_db.Dtos;
 using full_structure_db.Entities;
 using full_structure_db.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -17,83 +18,40 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
 
-    [HttpPost]
-    public IActionResult AddProduct([FromBody] Product product)
-    {
-        try
-        {
-            var products = _productService.AddProduct(product);
-            return Created("", new ApiResponse<Product>(products, "New Product Created Successfully"));
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
-        }
-    }
     
     [HttpGet]
     public IActionResult ShowAllProducts()
     {
-        try
-        {
-            var products = _productService.GetAllProducts();
-            if (!products.Any())
-            {
-                return NotFound(new ApiError("No products found", 404));
-            }
-            return Ok(new ApiResponse<List<Product>>(products, "get all data success"));
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, new ApiError(e.Message, 500, details: "Internal server error"));
-        }
+        var product = _productService.GetAllProducts();
+        return Ok(new ApiResponse<List<ProductResponseDto>>(product, "get all data success"));
     }
 
     [HttpGet("{id}")]
-    public IActionResult ShowOneProduct([FromRoute] int id)
+    public IActionResult ShowProductById([FromRoute] int id)
     {
-        try
-        {
-            var product = _productService.GetOneProduct(id);
-            if (product == null)
-            {
-                return NotFound(new ApiError("Product not found", 404));
-            }
+        var product = _productService.GetOneProduct(id);
+        return Ok(new ApiResponse<ProductResponseDto>(product, "get data success"));
+    }
 
-            return Ok(new ApiResponse<Product>(product, "get data success"));
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
-        }
+    [HttpPost]
+    public IActionResult CreateProduct([FromBody] ProductRequestDto dto)
+    {
+        var product = _productService.AddProduct(dto);
+        return Created("",new ApiResponse<ProductResponseDto>(product, "add data success"));
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateProduct([FromRoute] int id, [FromBody] Product product)
+    public IActionResult UpdateProduct([FromRoute] int id, [FromBody] ProductRequestDto dto)
     {
-        try
-        {
-            var p = _productService.UpdateProduct(id, product);
-            return Ok(new ApiResponse<Product>(p, "update data success"));
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
-        }
+        var product = _productService.UpdateProduct(id, dto);
+        return Ok(new ApiResponse<ProductResponseDto>(product, "update data success"));
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteProduct([FromRoute] int id)
     {
-        try
-        {
-            _productService.DeleteProduct(id);
-            return Ok(new ApiResponse<string>("Product Deleted Successfully"));
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
-        }
+        _productService.DeleteProduct(id);
+        return Ok(new ApiResponse<bool>(true, "delete data success"));
     }
     
 }

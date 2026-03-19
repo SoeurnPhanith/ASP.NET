@@ -25,4 +25,6 @@ public interface IProductRepository
     
     void Delete(Product product);
     
+    bool ExistsByName(string name);
+    
 }

@@ -45,4 +45,9 @@ public class ProductRepository : IProductRepository
         _context.Remove(product);
         _context.SaveChanges();
     }
+
+    public bool ExistsByName(string name)
+    {
+        return _context.Products.Any(p => p.Name == name);
+    }
 }

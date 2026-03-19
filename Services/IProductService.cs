@@ -1,16 +1,17 @@
+using full_structure_db.Dtos;
 using full_structure_db.Entities;
 
 namespace full_structure_db.Services;
 
 public interface IProductService
 {
-    List<Product> GetAllProducts();
+    List<ProductResponseDto> GetAllProducts();
     
-    Product AddProduct(Product product);
+    ProductResponseDto AddProduct(ProductRequestDto dto);
 
-    Product GetOneProduct(int id);
+    ProductResponseDto GetOneProduct(int id);
     
-    Product UpdateProduct(int id,Product product);
+    ProductResponseDto UpdateProduct(int id,ProductRequestDto dto);
     
     void DeleteProduct(int id);
 }
