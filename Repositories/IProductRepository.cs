@@ -15,4 +15,14 @@ public interface IProductRepository
     void Save(Product product);
     
     Product FindByName(string name);
+    
+    ///This method is user for find or get student by id
+    /// if it exists return @data, otherwise return @null
+    Product FindById(int id);
+    
+    ///This method is use for save and update data in to database
+    void Update(Product product);
+    
+    void Delete(Product product);
+    
 }

@@ -48,5 +48,52 @@ public class ProductController : ControllerBase
             return StatusCode(500, new ApiError(e.Message, 500, details: "Internal server error"));
         }
     }
+
+    [HttpGet("{id}")]
+    public IActionResult ShowOneProduct([FromRoute] int id)
+    {
+        try
+        {
+            var product = _productService.GetOneProduct(id);
+            if (product == null)
+            {
+                return NotFound(new ApiError("Product not found", 404));
+            }
+
+            return Ok(new ApiResponse<Product>(product, "get data success"));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateProduct([FromRoute] int id, [FromBody] Product product)
+    {
+        try
+        {
+            var p = _productService.UpdateProduct(id, product);
+            return Ok(new ApiResponse<Product>(p, "update data success"));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteProduct([FromRoute] int id)
+    {
+        try
+        {
+            _productService.DeleteProduct(id);
+            return Ok(new ApiResponse<string>("Product Deleted Successfully"));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, new ApiError(e.Message, 500, "Internal server error"));
+        }
+    }
     
 }

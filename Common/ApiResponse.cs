@@ -16,7 +16,7 @@ public class ApiResponse<T>
     
     public ApiResponse(string message)
     {
-        Success = false;
+        Success = true;
         Message = message;
         Data = default;
     }

@@ -103,3 +103,4 @@
 /home/yutaaaa/Documents/ASP.NET/full-structure-db/obj/Debug/net8.0/full-structure-db.pdb
 /home/yutaaaa/Documents/ASP.NET/full-structure-db/obj/Debug/net8.0/full-structure-db.genruntimeconfig.cache
 /home/yutaaaa/Documents/ASP.NET/full-structure-db/obj/Debug/net8.0/ref/full-structure-db.dll
+/home/yutaaaa/Documents/ASP.NET/full-structure-db/obj/Debug/net8.0/full-structure-db.sourcelink.json

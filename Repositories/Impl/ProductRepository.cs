@@ -26,6 +26,23 @@ public class ProductRepository : IProductRepository
 
     public Product FindByName(string name)
     {
-        throw new NotImplementedException();
+        return _context.Products.FirstOrDefault(p => p.Name == name);
+    }
+
+    public Product FindById(int id)
+    {
+        return _context.Products.FirstOrDefault(p => p.Id == id);
+    }
+
+    public void Update(Product product)
+    {
+        _context.Products.Update(product);
+        _context.SaveChanges();
+    }
+
+    public void Delete(Product product)
+    {
+        _context.Remove(product);
+        _context.SaveChanges();
     }
 }

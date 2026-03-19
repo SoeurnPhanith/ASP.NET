@@ -7,6 +7,7 @@ public class ApiError
     public object? Details { get; set; }
     public int? Code { get; set; }
 
+    //constructor for reponse Error
     public ApiError(string message, int code, object details = null)
     {
         Message = message;

@@ -1,3 +1,4 @@
+using full_structure_db.Common;
 using full_structure_db.Entities;
 using full_structure_db.Repositories;
 
@@ -18,5 +19,37 @@ public class ProductService : IProductService
     { 
         _productRepo.Save(product);
         return product;
+    }
+
+    public Product GetOneProduct(int id)
+    {
+        return _productRepo.FindById(id);
+    }
+
+    public Product UpdateProduct(int id, Product product)
+    {
+        Product findProduct = _productRepo.FindById(id);
+        if (findProduct == null)
+        {
+            throw new Exception("Product not found");
+        }
+        
+        findProduct.Name = product.Name;
+        findProduct.Price = product.Price;
+        findProduct.Quantity = product.Quantity;
+        
+        _productRepo.Update(findProduct);
+        return findProduct;
+    }
+
+    public void DeleteProduct(int id)
+    {
+        Product find = _productRepo.FindById(id);
+        if (find == null)
+        {
+            throw new Exception("Product not found");
+        }
+        
+        _productRepo.Delete(find);
     }
 }
