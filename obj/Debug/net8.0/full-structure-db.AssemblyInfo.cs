@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("full-structure-db")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb815270e591ca23d1064ad80fbdaa2c766339e0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c321ef439a998e878fe05ef9ac10634159a5c14e")]
 [assembly: System.Reflection.AssemblyProductAttribute("full-structure-db")]
 [assembly: System.Reflection.AssemblyTitleAttribute("full-structure-db")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

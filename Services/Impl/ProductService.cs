@@ -3,6 +3,7 @@ using full_structure_db.Common;
 using full_structure_db.Dtos;
 using full_structure_db.Entities;
 using full_structure_db.Exception;
+using full_structure_db.Mapper;
 using full_structure_db.Repositories;
 
 namespace full_structure_db.Services.Impl;
@@ -27,14 +28,7 @@ public class ProductService : IProductService
         }
 
         //map from entity -> dto
-        var productDtos = products.Select(p => new ProductResponseDto
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Price = p.Price,
-            Quantity = p.Quantity
-        }).ToList();
-
+        var productDtos = products.Select(ProductMapper.ToResponseDto).ToList();
         return productDtos;
     }
     public ProductResponseDto AddProduct(ProductRequestDto dto)
@@ -45,25 +39,13 @@ public class ProductService : IProductService
         }
         
         //map from dto -> entity
-        Product product = new Product
-        {
-            Name = dto.Name,
-            Price = dto.Price,
-            Quantity = dto.Quantity
-        };
+        Product product = ProductMapper.ToEntity(dto);
         
         //save to db
         _productRepo.Save(product);
         
         //map from entity -> dto
-        ProductResponseDto response = new ProductResponseDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Quantity = product.Quantity,
-            Total =  product.Total
-        };
+        ProductResponseDto response = ProductMapper.ToResponseDto(product);
         return response;
     }
 
@@ -74,14 +56,7 @@ public class ProductService : IProductService
                       ?? throw new ResourceNotFoundException("Product not found");
         
         //map data from entity -> response dto
-        ProductResponseDto dto = new ProductResponseDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Quantity = product.Quantity,
-            Total = product.Total
-        };
+        ProductResponseDto dto = ProductMapper.ToResponseDto(product);
         return dto;
     }
 
@@ -98,21 +73,13 @@ public class ProductService : IProductService
         }
 
         // Update entity from DTO
-        find.Name = dto.Name;
-        find.Price = dto.Price;
-        find.Quantity = dto.Quantity;
+        ProductMapper.UpdateEntity(dto, find);
 
         // Save changes
         _productRepo.Update(find);
 
         // Map entity → Response DTO
-        return new ProductResponseDto
-        {
-            Id = find.Id,
-            Name = find.Name,
-            Price = find.Price,
-            Quantity = find.Quantity
-        };
+        return ProductMapper.ToResponseDto(find);
     }
 
     public void DeleteProduct(int id)

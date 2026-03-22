@@ -1,8 +1,6 @@
 using full_structure_db.Common;
 using full_structure_db.Dtos;
-using full_structure_db.Entities;
 using full_structure_db.Services;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace full_structure_db.Controller;
@@ -17,7 +15,6 @@ public class ProductController : ControllerBase
     {
         _productService = productService;
     }
-
     
     [HttpGet]
     public IActionResult ShowAllProducts()
